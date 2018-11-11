@@ -23,7 +23,7 @@ zuul:
 #    api-a:
 #      path: /api-a/**
 #      serviceId: service-ribbon
-    api-b:
+    api-sv:
       path: /api-sv/**
       serviceId: service-feign
     api-web:
