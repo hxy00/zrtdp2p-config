@@ -25,7 +25,7 @@ zuul:
 #      serviceId: service-ribbon
     api-sv:
       path: /api-sv/**
-      serviceId: service-feign
+      serviceId: zrtdp2p-service
     api-web:
       path: /api-web/**
       url: http://localhost:8766/
