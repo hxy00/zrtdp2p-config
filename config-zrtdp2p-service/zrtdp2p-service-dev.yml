@@ -1,46 +1,53 @@
 server:
-  port: 9600
+  port: 8081
+
 eureka:
   client:
     service-url:
      defaultZone: http://127.0.0.1:8761/eureka/
+
 spring:
+  application:
+    name: zrtdp2p-service
   datasource:
       name: emt_epay
-      url: jdbc:mysql://127.0.0.1:3306/emt_epay?characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&useAffectedRows=true
-      username: root
-      password: q1w2e3r4t5
       type: com.alibaba.druid.pool.DruidDataSource
-      driver-class-name: com.mysql.jdbc.Driver
-      max-active: 20
-      initial-size: 1
-      max-wait: 60000
-      min-idle: 1
-      time-between-eviction-runs-millis: 60000
-      min-evictable-idle-time-millis: 300000
-      validation-query: select 'x'
-      test-while-idle: true
-      test-on-borrow: false
-      pool-prepared-statements: true
-      max-open-prepared-statements: 20
-  redis:
-    host:  192.168.3.235 #kayakcd.f3322.net
-    port:  6379 #26379
-    password:  mtdev #kk123456
-    timeout: 5000
-    pool:
-      max-active: 8
-      max-wait: -1
-      max-idle: 8
-      min-idle: 2
+      druid:
+        filters: stat
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/emt_epay?characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&useAffectedRows=true
+        username: root
+        password: q1w2e3r4t5
+        initial-size: 1
+        min-idle: 1
+        max-active: 20
+        max-wait: 60000
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 'x'
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: false
+        max-pool-prepared-statement-per-connection-size: 20
+
 multipart:
   enabled: true
   max-file-size: 50mb
   max-request-size: 50mb
+
 mybatis:
- mapper-locations: classpath*:mapping/*.xml
+  mapper-locations: classpath*:mapping/*.xml
+  type-aliases-package: com.smkj.zrtdp2pservice.entity
+
 
 #日志
 logging:
   level:
     com.smkj.zrtdp2pservice: debug
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count==countSql
